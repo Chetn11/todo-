@@ -1,8 +1,15 @@
 import React, { useState } from "react";
-import { TextField, Button, Stack, Container } from "@mui/material";
-import LoadingButton from '@mui/lab/LoadingButton';
+import {
+  Container,
+  IconButton,
+  InputBase,
+  Paper,
+} from "@mui/material";
+
 import supabase from "../supabase";
-import TaskList from "./TaskList";
+import LoopIcon from '@mui/icons-material/Loop';
+import AddIcon from "@mui/icons-material/Add";
+
 
 const AddTask = () => {
   const [text, setText] = useState("");
@@ -16,44 +23,51 @@ const AddTask = () => {
     }
     setLoading(true);
     const { data, error } = await supabase.from("todos").insert([{ text }]);
-    if(!error){
+    if (!error) {
       setLoading(false);
-      alert("data added")
+      alert("data added");
       window.location.reload(false);
+    } else {
+      console.log(error);
     }
-    else{
-      console.log(error)
-    }
-    
   };
 
   return (
-    <Container component="section"
-    sx={{
-      margin:"auto"
-    }}>
-      <Stack direction="row" spacing={2} alignItems="center">
-        <TextField
-          variant="outlined"
-          placeholder="Do the laundry"
+    <Container
+      component="section"
+      sx={{
+        margin: "auto",
+      }}
+    >
+      <Paper
+        component="form"
+        sx={{
+          p: "6px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          margin: "auto",
+          marginBottom: "40px",
+          width: 400,
+        }}
+      >
+        <InputBase
+          sx={{ ml: 1, flex: 1 }}
+          placeholder="Add Todo"
           value={text}
           onChange={(e) => setText(e.target.value)}
           disabled={loading}
         />
-        <Button
-          variant="contained"
-          color="primary"
-          type="submit"
+
+        <IconButton
+          type="button"
+          sx={{ p: "10px", bgcolor: "#4190f7", color: "white" }}
+          aria-label="search"
           onClick={handleSubmit}
-          disabled={loading}
-          sx={{ minWidth: "auto" }}
         >
-          {loading ? "Adding..." : "Add"}
-        </Button>
-      </Stack>
-
-
-
+          {loading ? <LoopIcon/> :  <AddIcon />}
+        </IconButton>
+      </Paper>
     </Container>
   );
 };

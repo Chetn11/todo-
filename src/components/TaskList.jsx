@@ -7,13 +7,17 @@ import {
   Divider,
   Grid,
   IconButton,
+  InputBase,
+  Paper,
   Stack,
   TextField,
   Typography,
 } from "@mui/material";
 import supabase from "../supabase";
 import DeleteTask from "./DeleteTask";
-
+import LoopIcon from '@mui/icons-material/Loop';
+import UpgradeIcon from '@mui/icons-material/Upgrade';
+import CloseIcon from '@mui/icons-material/Close';
 import { Edit } from "@mui/icons-material";
 
 function TaskList() {
@@ -57,27 +61,50 @@ function TaskList() {
     flexDirection:"column",
     justifyContent: 'center',
   }}>
-        {update ? (
-          <Stack direction="row" spacing={2} alignItems="center">
-            <TextField
-              variant="outlined"
-              placeholder="Do the laundry"
-              value={text}
+     {update ?<Paper
+        component="form"
+        sx={{
+          p: "6px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          margin: "auto",
+          marginBottom: "40px",
+          width: 400,
+        }}
+      >
+        <InputBase
+          sx={{ ml: 1, flex: 1 }}
+          placeholder="Update Todo"
+          value={text}
               onChange={(e) => setText(e.target.value)}
               disabled={loadingup}
-            />
-            <Button
-              variant="contained"
-              color="primary"
-              type="submit"
-              onClick={handleUpdate}
+          
+        />
+
+        <IconButton
+          type="button"
+          sx={{ p: "5px", bgcolor: "#4190f7", color: "white",m:"2px" }}
+          aria-label="Update"
+          onClick={handleUpdate}
               disabled={loadingup}
-              sx={{ minWidth: "auto" }}
-            >
-              {loadingup ? "updating" : "Update"}
-            </Button>
-          </Stack>
-        ) : null}
+        >
+          {loadingup ? <LoopIcon/> :  <UpgradeIcon />}
+          
+        </IconButton>
+        <IconButton
+          type="button"
+          sx={{ p: "5px", bgcolor: "red", color: "white" }}
+          aria-label="close"
+          onClick={(e)=>setUpdate(!update)}
+             
+        >
+         <CloseIcon/>
+          
+        </IconButton>
+        
+      </Paper>:null}
+      
         <Grid
           container
           direction="column"
@@ -87,7 +114,7 @@ function TaskList() {
             borderRadius: "lg",
             padding: "5",
             marginTop:"50px",
-            marginLeft:"-30px"
+            
           }}
         >
           <Container
