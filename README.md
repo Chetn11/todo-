@@ -26,16 +26,16 @@ You can access the deployed version of this assignment [here](https://todo-green
 ## Screenshots
 
 Screen Shots
-1. If todo were not created
+
 ![Screenshot 1](https://github.com/Chetn11/todo-/blob/main/src/image/ss1.PNG)
 
-2. After adding(creating) some todo
+1. After adding(creating) some todo
 ![Screenshot 1](https://github.com/Chetn11/todo-/blob/main/src/image/ss2.PNG)
 
-3. Update function
+2. Update function
 ![Screenshot 1](https://github.com/Chetn11/todo-/blob/main/src/image/ss3.PNG)
 
-4. Delete function
+3. Delete function
 ![Screenshot 1](https://github.com/Chetn11/todo-/blob/main/src/image/ss2.PNG)
 
 ## video
