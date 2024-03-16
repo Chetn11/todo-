@@ -19,6 +19,7 @@ import LoopIcon from '@mui/icons-material/Loop';
 import UpgradeIcon from '@mui/icons-material/Upgrade';
 import CloseIcon from '@mui/icons-material/Close';
 import { Edit } from "@mui/icons-material";
+import image from "../image/todo blank.svg"
 
 function TaskList() {
   const [tasks, setTasks] = useState([]);
@@ -52,6 +53,16 @@ function TaskList() {
     fetchData();
   }, []);
 
+
+  if(!tasks || !tasks.length){
+    return(
+      <Box textAlign="center" mt="30px" maxWidth="95%" margin="auto">
+  <img src={image} alt="blank" />
+  <Typography>Create Your Todo !</Typography>
+</Box>
+
+    )
+  }
   return (
     <>
       <Container 
@@ -113,7 +124,7 @@ function TaskList() {
             // border: "1px solid",
             borderRadius: "lg",
             padding: "5",
-            marginTop:"50px",
+            marginTop:"30px",
             
           }}
         >
@@ -136,7 +147,7 @@ function TaskList() {
                   item
                   key={task.id}
                   variant="outlined"
-                  style={{ margin: "5px", width:"300px" }}
+                  style={{ margin: "5px", width:"300px",backgroundColor:"#a9e5e5" }}
                 >
                   <Grid
                     container
