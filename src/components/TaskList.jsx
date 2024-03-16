@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
+  Card,
+  Container,
   Divider,
   Grid,
   IconButton,
@@ -14,14 +16,12 @@ import DeleteTask from "./DeleteTask";
 
 import { Edit } from "@mui/icons-material";
 
-
 function TaskList() {
-
   const [tasks, setTasks] = useState([]);
   const [text, setText] = useState("");
   const [update, setUpdate] = useState(false);
-  const[uid,setUid]=useState(null);
-  const[loadingup,setLoadingUp]=useState(false);
+  const [uid, setUid] = useState(null);
+  const [loadingup, setLoadingUp] = useState(false);
 
   console.log(text);
   const handleUpdate = async (e) => {
@@ -30,10 +30,12 @@ function TaskList() {
       alert("empty box");
       return;
     }
-    const {data,error}= await supabase.from("todos").update({text:text}).eq("id",uid);
+    const { data, error } = await supabase
+      .from("todos")
+      .update({ text: text })
+      .eq("id", uid);
     setUid(null);
     window.location.reload(false);
-    
   };
 
   const fetchData = async () => {
@@ -48,81 +50,100 @@ function TaskList() {
 
   return (
     <>
-    <Box>
-    {update?<Stack direction="row" spacing={2} alignItems="center">
-        <TextField
-          variant="outlined"
-          placeholder="Do the laundry"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          disabled={loadingup}
-        />
-        <Button
-          variant="contained"
-          color="primary"
-          type="submit"
-          onClick={handleUpdate}
-          disabled={loadingup}
-          sx={{ minWidth: "auto" }}
+      <Container 
+        component="section"
+  sx={{
+    display: 'flex',
+    flexDirection:"column",
+    justifyContent: 'center',
+  }}>
+        {update ? (
+          <Stack direction="row" spacing={2} alignItems="center">
+            <TextField
+              variant="outlined"
+              placeholder="Do the laundry"
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              disabled={loadingup}
+            />
+            <Button
+              variant="contained"
+              color="primary"
+              type="submit"
+              onClick={handleUpdate}
+              disabled={loadingup}
+              sx={{ minWidth: "auto" }}
+            >
+              {loadingup ? "updating" : "Update"}
+            </Button>
+          </Stack>
+        ) : null}
+        <Grid
+          container
+          direction="column"
+          spacing={1}
+          sx={{
+            // border: "1px solid",
+            borderRadius: "lg",
+            padding: "5",
+            marginTop:"50px",
+            marginLeft:"-30px"
+          }}
         >
-          {loadingup ? "updating" : "Update"}
-        </Button>
-      </Stack>:null}
-      <Grid
-        container
-        direction="column"
-        spacing={1}
-        sx={{
-          border: "1px solid",
-          borderColor: "gray.100",
-          borderRadius: "lg",
-          padding: "5",
-          margin: "10",
-          maxWidth: { xs: "90vw", sm: "80vw", lg: "50vw", xl: "30vw" },
-          alignItems: "stretch",
-        }}
-      >
-        <Grid item>
-          <Grid
-            container
-            direction="column"
-            justifyContent="space-between"
-            alignItems="center"
+          <Container
+            component="section"
             sx={{
-              borderRadius: "lg",
-              padding: "8px",
-              "&:hover": { backgroundColor: "grey.200" },
+              display: "flex",
+              justifyContent: "center",
             }}
           >
-            {tasks.map((task) => (
-              <Grid item key={task.id}>
-                <Grid
-                  container
-                  direction="row"
-                  justifyContent="space-between"
-                  alignItems="center"
-                  sx={{
-                    borderRadius: "lg",
-                    padding: "8px",
-                    "&:hover": { backgroundColor: "grey.200" },
-                  }}
+            <Grid
+              container
+              direction="column"
+              justifyContent="space-between"
+              alignItems="center"
+              
+            >
+              {tasks.map((task) => (
+                <Card
+                  item
+                  key={task.id}
+                  variant="outlined"
+                  style={{ margin: "5px", width:"300px" }}
                 >
-                  <Typography variant="body1" sx={{ flexGrow: 1 }}>
-                    {task.text}
-                  </Typography>
-                  <IconButton color="inherit" onClick={()=>{setUpdate(true); setUid(task.id)}}>
-                    <Edit />
-                  </IconButton>
-                  <DeleteTask id={task.id} />
-                </Grid>
-                <Divider />
-              </Grid>
-            ))}
-          </Grid>
-          <Divider />
+                  <Grid
+                    container
+                    direction="row"
+                    justifyContent="space-evenly"
+                    alignItems="center"
+                    sx={{
+                      borderRadius: "lg",
+                      padding: "8px",
+                      "&:hover": { backgroundColor: "grey.200" },
+                    }}
+                  >
+                    <Typography variant="body1" sx={{ flexGrow: 1 }}>
+                      {task.text}
+                    </Typography>
+                    <IconButton
+                      color="inherit"
+                      onClick={() => {
+                        setUpdate(true);
+                        setUid(task.id);
+                      }}
+                    >
+                      <Edit />
+                    </IconButton>
+                    <DeleteTask id={task.id} />
+                  </Grid>
+                  <Divider />
+                </Card>
+              ))}
+            </Grid>
+            <Divider />
+          </Container>
         </Grid>
-      </Grid>
-      </Box>
+      </Container>
     </>
   );
 }

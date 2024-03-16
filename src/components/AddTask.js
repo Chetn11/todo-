@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { TextField, Button, Stack } from "@mui/material";
+import { TextField, Button, Stack, Container } from "@mui/material";
 import LoadingButton from '@mui/lab/LoadingButton';
 import supabase from "../supabase";
+import TaskList from "./TaskList";
 
 const AddTask = () => {
   const [text, setText] = useState("");
@@ -27,7 +28,10 @@ const AddTask = () => {
   };
 
   return (
-    <form >
+    <Container component="section"
+    sx={{
+      margin:"auto"
+    }}>
       <Stack direction="row" spacing={2} alignItems="center">
         <TextField
           variant="outlined"
@@ -48,9 +52,9 @@ const AddTask = () => {
         </Button>
       </Stack>
 
-      
 
-    </form>
+
+    </Container>
   );
 };
 
