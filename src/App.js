@@ -8,7 +8,7 @@ import NavBar from './components/NavBar';
 
 function App() {
   return (
-    <div>
+    <>
     <NavBar/>
     <Container
   component="section"
@@ -25,7 +25,7 @@ function App() {
   </Stack>
 </Container>
 
-</div>
+</>
   );
 }
 
