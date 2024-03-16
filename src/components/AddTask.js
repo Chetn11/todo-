@@ -27,10 +27,10 @@ const AddTask = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form >
       <Stack direction="row" spacing={2} alignItems="center">
         <TextField
-          variant="filled"
+          variant="outlined"
           placeholder="Do the laundry"
           value={text}
           onChange={(e) => setText(e.target.value)}
@@ -40,13 +40,16 @@ const AddTask = () => {
           variant="contained"
           color="primary"
           type="submit"
+          onClick={handleSubmit}
           disabled={loading}
           sx={{ minWidth: "auto" }}
         >
           {loading ? "Adding..." : "Add"}
         </Button>
-       
       </Stack>
+
+      
+
     </form>
   );
 };
