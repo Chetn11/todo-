@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { TextField, Button, Stack } from "@mui/material";
+import LoadingButton from '@mui/lab/LoadingButton';
 import supabase from "../supabase";
 
 const AddTask = () => {
@@ -12,9 +13,10 @@ const AddTask = () => {
       alert("empty box");
       return;
     }
-
+    setLoading(true);
     const { data, error } = await supabase.from("todos").insert([{ text }]);
     if(!error){
+      setLoading(false);
       alert("data added")
       window.location.reload(false);
     }
@@ -43,6 +45,7 @@ const AddTask = () => {
         >
           {loading ? "Adding..." : "Add"}
         </Button>
+       
       </Stack>
     </form>
   );
