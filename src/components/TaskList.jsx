@@ -58,7 +58,7 @@ function TaskList() {
     return(
       <Box textAlign="center" mt="30px" maxWidth="95%" margin="auto">
   <img src={image} alt="blank" />
-  <Typography>Create Your Todo !</Typography>
+  <Typography variant="h5" fontFamily='raleway'>Create Your Todo !</Typography>
 </Box>
 
     )
@@ -147,12 +147,12 @@ function TaskList() {
                   item
                   key={task.id}
                   variant="outlined"
-                  style={{ margin: "5px", width:"300px",backgroundColor:"#a9e5e5" }}
+                  style={{ margin: "5px", width:"400px",backgroundColor:"#a9e5e5", p:"10px" }}
                 >
                   <Grid
                     container
                     direction="row"
-                    justifyContent="space-evenly"
+                    justifyContent="space-between"
                     alignItems="center"
                     sx={{
                       borderRadius: "lg",
@@ -160,7 +160,7 @@ function TaskList() {
                       "&:hover": { backgroundColor: "grey.200" },
                     }}
                   >
-                    <Typography variant="body1" sx={{ flexGrow: 1 }}>
+                    <Typography variant="h6" sx={{ flexGrow: 1 , fontFamily:'raleway', fontWeight:"400"}}>
                       {task.text}
                     </Typography>
                     <IconButton

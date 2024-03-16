@@ -12,7 +12,7 @@ export default function NavBar() {
       <AppBar position="static">
         <Toolbar>
           
-          <Typography variant="h3" component="div" sx={{ flexGrow: 1, textAlign:"center" }}>
+          <Typography variant="h3" component="div" sx={{ flexGrow: 1, textAlign:"center", fontFamily:"raleway", fontWeight:"400" }} >
             Todo App
           </Typography>
         </Toolbar>

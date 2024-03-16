@@ -9,6 +9,7 @@ import {
 import supabase from "../supabase";
 import LoopIcon from '@mui/icons-material/Loop';
 import AddIcon from "@mui/icons-material/Add";
+import Alert from '@mui/material/Alert';
 
 
 const AddTask = () => {
@@ -18,14 +19,16 @@ const AddTask = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!text) {
-      alert("empty box");
+      // alert("empty box");
       return;
     }
     setLoading(true);
     const { data, error } = await supabase.from("todos").insert([{ text }]);
     if (!error) {
       setLoading(false);
-      alert("data added");
+      // alert("data added");
+      
+      <Alert severity="success">This is a success Alert.</Alert>
       window.location.reload(false);
     } else {
       console.log(error);
