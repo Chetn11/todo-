@@ -1,6 +1,6 @@
 ***** Todo app *****
 
-Basically it a todo app where user can create owen todo(notes) in this app i implemented all crude operation like get, add, delete and update. 
+Basically it's a todo app where user can create  todo(notes) in this app i implemented all crude operation like get, add, delete and update. 
 for backend i use supabase database and for css material ui.
 
 ## Usage
